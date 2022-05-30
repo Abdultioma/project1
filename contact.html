@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Space Port | Contact Us</title>
+</head>
+<body>
+    <div class="banner" id="home">
+        <h1>Explore more space</h1>
+    </div>
+    <header class="clearfix">
+        <h2>Space Port</h2>
+        <nav>
+        <a href="index.html">Home</a>
+        <a href="register.html">Register</a>
+        <a href="contact.html" class="visited">Contact Us</a>
+        </nav>
+        <div class="search">
+            <input type="search" placeholder="Search..." method="post">
+        </div>
+    </header>
+    <div class="body">
+        <div class="form clearfix">
+            <form onsubmit="return validate()" class="contact-form" id="form">
+                <h2>leave us a message!!</h2>
+                    <p id="msg"></p>
+                <ul>
+                    <li class="onerow"><label for="fname">First Name</label><input placeholder="First Name" type="text"></li>
+                    <li class="onerow"><label for="lname">Last Name</label><input placeholder="Last Name" type="text"></li>
+                    <li><label for="email">Email</label><input placeholder="Email" type="email"></li>
+                    <li><label for="msg">Message</label>
+                        <textarea id="comment_box" value="">
+                        </textarea>
+                    </li>
+                    <li><input type="submit" value="Send"></li>
+                </ul>
+            </form>
+        </div>
+        <aside>
+            <img src="img/rocket.png" alt="">
+        </aside>
+    </div>
+    <footer>
+        <h3>Space Port</h3>
+        <span>&copy mikibo 2021</span>
+    </footer>
+
+    <script>
+            let text = "";
+            let form = document.forms["form"];
+            let msg = document.getElementById("msg");
+        function check(){
+            let comment = form["comment_box"];
+            if(comment.value.length > 150){
+                text += "Comment cannot exceed more than 150 characters";
+            }else if(comment.value.length == 24){
+                text += "Please write something."
+            }
+        }
+
+        function validate(){
+            check();
+            if(text.length == 0){
+                form.setAttribute("class", "success");
+                form.innerHTML = "Thank you for contacting us!";
+
+                return false;
+            }else{
+                msg.style.display = "block";
+                msg.innerHTML = text;
+                msg.setAttribute("class", "failed");
+                
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>

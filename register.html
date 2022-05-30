@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Space Port</title>
+</head>
+<body>
+    <div class="banner" id="home">
+        <h1>Explore more space</h1>
+    </div>
+    <header class="clearfix">
+        <h2>Space Port</h2>
+        <nav>
+        <a href="index.html">Home</a>
+        <a href="#form" class="visited">Register</a>
+        <a href="contact.html">Contact Us</a>
+        </nav>
+        <div class="search">
+            <input type="search" placeholder="Search..." method="post">
+        </div>
+    </header>
+    <div class="body">
+        <div class="top clearfix">
+            <div class="service">
+                <h2>our services</h2>
+                <p>
+                    We provide the easiet way to board to space or mars with major space companies and intriguing space crafts. 
+                </p>
+            </div>
+            <div class="mission">
+                <h2>our mission</h2>
+                <p>
+                    our mission is to provide our customers with the best space ports, simple and easy way to port.
+                    
+                </p>
+            </div>
+        </div>
+        <div class="form clearfix">
+            <form action="#" id="form" onsubmit="return validateForm()">
+                <h2>register with us!!</h2>
+                <p id="msg"></p>
+                <ul id="ul">
+                    <li>
+                        <label for="fname">
+                            First name
+                        </label>
+                        <input type="text" id="fname">
+                    </li>
+                    <li>
+                        <label for="lname" id="lname">
+                            Last Name
+                        </label>
+                        <input type="text" id="lname">
+                    </li>
+                    <li>
+                        <label for="email">
+                            Email
+                        </label>
+                        <input type="email" id="email">
+                    </li>
+                    <li>
+                        <label for="shuttles">
+                            aero porter
+                        </label>
+                        <select id="shuttles" name="shuttle">
+                            <option value="spacex">SpaceX</option>
+                            <option value="blueorigin">Blue Origin</option>
+                            <option value="galactic">Virgin Galactic</option>
+                            <option value="boeing">Boeing</option>
+                            <option value="lockheed">Lockheed Martin</option>
+                            <option value="nasa">NASA</option>
+                        </select>   
+                    </li>
+                    <li>
+                        <label for="date">Date</label>
+                        <input type="date" name="date" id="date">
+                    </li>
+                    <li class="misc">
+                        <label>account type:</label>
+                        <input type="radio" name="acctype">IP
+                        <input type="radio" name="acctype">VIP
+                        <input type="radio" name="acctype">VVIP
+                    </li>
+                    <li class="misc">
+                        <input type="checkbox" name="agree" id="term">
+                        <label for="term" style="font-size: 18px;">
+                            I agree with terms and policies
+                        </label>
+                    </li>
+                    <li>
+                        <input type="submit" value="Submit">
+                    </li> 
+                </ul>
+            </form>
+        </div>
+        <aside>
+            <img src="img/rocket.png" alt="">
+        </aside>
+    </div>
+    <footer>
+        <h3>Space Port</h3>
+        <span>&copy mikibo 2021</span>
+    </footer>
+
+    <script>
+        let form = document.forms["form"];
+        let fname = form.fname;
+        let lname = form.lname;
+        let date = form.date;
+        let msg = document.getElementById("msg");
+        let text = "";
+
+        function validateForm(){
+            text = "";
+            for(let el of form){
+                if(el.value == ""){
+                    text += "Fill out all fields.<br>";
+                    break;
+                }
+            }
+
+            checkForNum(fname, lname);
+            checkDate();
+
+            msg.style.display = "block";
+            if(text.length == 0){            
+                if(!isChecked()){
+                    text += "Please agree with our terms and policies.<br>";
+                    msg.innerHTML = text;
+                    msg.setAttribute("class", "failed");
+                    return false;
+                }
+                    form.setAttribute("class", "success");
+                    form.innerHTML = "Success!";
+
+                    return false;
+            }
+            else{
+                    msg.innerHTML = text;
+                    msg.setAttribute("class", "failed");
+                    
+                    return false;
+            }
+            
+        }
+
+        function checkDate(){
+            let parsedDate = Date.parse(date.value);
+            let now = Date.parse(new Date());
+            if( parsedDate < now){
+                date.style.border = "1px solid red";
+                text += "Date is not valid.<br>";
+            }
+        }
+
+        function checkForNum(){
+            for(let i=0; i<arguments.length; i++){
+                for(let c of arguments[i].value){
+                    if(!isNaN(c)){
+                        arguments[i].style.border = "1px solid red";
+                        text += "Name cannot contain numbers.<br>"
+                        break;
+                    }
+                }
+            }
+        }
+
+        function isChecked(){
+            return document.forms["form"].agree.checked;
+        }
+    </script>
+
+</body>
+</html>
